@@ -217,7 +217,6 @@ textarea {
 
 .jg_banner {
     width: 100%;
-    height: 283px;
     background: #daeef9;
 }
 
@@ -1779,9 +1778,7 @@ a.red {
         width: 254px;
         height: 173px;
     }
-    .jg_banner {
-        height: 364px;
-    }
+
     .jg_banner1 {
         width: 1400px;
     }
