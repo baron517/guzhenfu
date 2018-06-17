@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <TITLE>订单列表</TITLE>
+    <META content='' name='keywords'>
+    <META content='' name='description'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection" />
+    <link rel="dns-prefetch" href="https://api.mch.weixin.qq.com" />
+    <link href="css/sj_xly.main.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/xin_con.css">
+    <!--[if lt IE 9]><script type="text/javascript" src="//img1.xhdxly.com/2016/mobile/html5shiv.js"></script><![endif]-->
+    <style>
+        .youhui_alert {
+            font-family: "微软雅黑";
+            font-size: 14px;
+            color: #ff0000
+        }
+    </style>
+</head>
+
+<body>
+    <script type="text/javascript">
+        // 防止该页面被其他页面iframe住
+        if (window != window.parent) {
+            window.parent.location = '/';
+        }
+    </script>
+    <div class="sjx_head" id="sjx_head">
+        <div class="sjx_hleft" id="mobilegoback"><i class="iconfont"></i></div>
+        <div class="h_img"><img src="img/sj_xlogo2.png"></div>
+        <div class="s-title">订单列表</div>
+    </div>
+
+    <div class="auto mem_app3_m2">
+        <ul class="sjq_tul" id="content">
+            <!-- <li>
+
+                    <div class="sjq_tac active" id="order_content">
+                        <span>课程名称：</span>
+                         <span>时间：2018-07-03--2018-07-09</span>
+                         <span>单价：￥3900.00</span>
+                         
+                    </div>
+                    <div class = "line_bg"></div> 
+                </li> -->
+
+        </ul>
+    </div>
+
+    <div id="content_blank">
+
+        <div class="auto">
+            <div class="xlys-kc" id="xlys-kc">
+                <ul>
+                    <li class="active">
+                        <div style="width: 100%; height: 100px; text-align: center; line-height: 100px; background-color: white;">
+                            <span>给孩子一个机会，还你一个未来！</span>
+                        </div>
+
+                        <div class="xlys-kc-d xly-bj displaynone" style="display: block;">
+                            <ul class="xly-ss-c-ul">
+
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/xin_xly_sj.js"></script>
+
+    <script>
+        (function() {
+            var u_phone = localStorage.getItem("u_phone");
+
+            var role = GetQueryString("role");
+            if (!role) {
+                role = 'admin';
+            }
+
+
+
+            $.getJSON(urlString + "g=Api&m=CommonApi&a=getOrderList&phone=" + u_phone + "&role=" + role,
+                function(data) {
+                    console.log(data);
+                    if (data.length == 0) {
+                        $("#content_blank").show();
+                        $("#content").hide();
+
+
+                        $.getJSON(urlString + "g=Api&m=CommonApi&a=getProList",
+                            function(data) {
+
+                                var html = "";
+
+                                var newData = data.sort(function(a, b) {
+                                    var aDays = 0,
+                                        bDays = 0;
+                                    aDays = parseInt(a.sort);
+                                    bDays = parseInt(b.sort);
+                                    // console.log(aDays + "---" + bDays);
+                                    return aDays - bDays;
+                                });
+
+                                newData.reduce(function(pre, item) {
+                                    html += " <li><a href='detail.html?id=" + item.id + "'><h3>" +
+                                        item.title + "</h3><div class='xly-ssc-img'><img src=' " +
+                                        imgHead + item.img + " ' alt=' " +
+                                        item.title + "'></div><div class='xly-ssc-r'><p>" + item.brief +
+                                        "<strong>￥" + item.price + "<s>/" + item.trip_days + "</s></strong></p><div class='ssc_san'><span>适合对象：" +
+                                        item.target + "</span> </div><div class='ssc_biaoq'>";
+
+                                    if (item.type_list) {
+                                        var typeList = item.type_list.split(",");
+                                        typeList.reduce(function(pre, current) {
+                                            html += " <span>" + current + "</span> ";
+                                            return current;
+                                        }, 0)
+                                    }
+                                    html += "<div class='clear'></div></div></div></a></li> ";
+
+
+                                }, 0);
+                                $('.xly-ss-c-ul').append(html);
+                            });
+
+
+                    } else {
+                        $("#content_blank").hide();
+                        $("#content").show();
+
+                        var html = "";
+
+                        var orderStatus = [
+                            "已下单",
+                            "已沟通",
+                            "已支付",
+                            "已开营"
+                        ]
+                        data.reduce(function(pre, item, index) {
+
+
+                            html += " <li><div class='sjq_tac active' style='margin_bottom:10px'><span>课程名称：" +
+                                item.title + "</span><span>手机：" +
+                                item.o_phone +
+                                "</span><span>单价：￥" +
+                                item.price + "</span><span>订单状态: " +
+                                orderStatus[item.status - 1] + "</span></div><div class = 'line_bg'></div> </li> "
+
+                            return item;
+                        }, 0)
+
+                        $('#content').append(html);
+                    }
+
+                }
+            );
+
+        })();
+    </script>
+
+</body>
+
+</html>

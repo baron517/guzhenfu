@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>用户登录</title>
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection" />
+    <link href="css/sj_xly.main.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <script type="text/javascript">
+        // 防止该页面被其他页面iframe住
+        if (window != window.parent) {
+            window.parent.location = "/";
+        }
+    </script>
+    <div class="sjx_head" id="sjx_head">
+        <div class="sjx_hleft"><a href="javascript:history.go(-1)"><i class="iconfont "></i></a></div>
+        <div class="h_img"><img src="img/logo.jpg"></div>
+        <div class="s-title">登录</div>
+        <!-- <div class="sjx_hright"><a href="javascript:void(0)"><i class="iconfont ri2"></i></a></div> -->
+        <div class="clear"></div>
+        <div class="dj_sj_w">
+            <ul class="dj_sj_ul">
+                <li>
+                    <a href="index.html">
+                        <p><i class="iconfont">&#xe6b3;</i></p>
+                        <p>首页</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="category.html">
+                        <p><i class="iconfont">&#xe624;</i></p>
+                        <p>分类搜索</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <p><i class="iconfont">&#xe62e;</i></p>
+                        <p>购课车</p>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <p><i class="iconfont">&#xe69b;</i></p>
+                        <p>我的</p>
+                    </a>
+                </li>
+                <div class="clear"></div>
+            </ul>
+        </div>
+    </div>
+    <div class="auto">
+
+        <div class="tab_t displaynone" id="tab_t">
+            <a href="javascript:void(0)" class="active">手机快捷登录</a>
+            <a href="javascript:void(0)">账户登录</a>
+            <div class="clear"></div>
+        </div>
+
+        <div class="tab_d" id="tab_d">
+
+            <div class="tab_page displaynone">
+                <form id="login">
+                    <input type="hidden" name="_tkey" value="76abf1563f25b7a15416133e0d8aca72">
+                    <div class="mem_login_tishi" id="mem_login_tishi"></div>
+                    <ul class="sjd_ul">
+                        <li>手机号<input type="tel" placeholder="已验证手机号" name="user_name" id="user_name" maxlength="11" autocomplete="off"></li>
+                        <li>登录密码<input type="password" placeholder="输入密码" name="psw" id="psw" autocomplete="off" maxlength="20">
+                            <a href="javascript:void(0)" class="eye-ico" id="eye-ico"></a>
+                        </li>
+
+                    </ul>
+
+                    <div class="sjd_qd"><a href="javascript:void(0)" id="mem_login_btn">登录</a></div>
+                    <div class="keep_login"><input name="keep_login" type="checkbox" class="keep_login_input" value="1" checked><span>一个月内免登陆</span></div>
+                </form>
+            </div>
+            <div class="tab_page">
+                <form id="Dt_login">
+                    <input type="hidden" name="_tkey" value="76abf1563f25b7a15416133e0d8aca72">
+                    <input type="hidden" name="logintype" value="1">
+                    <div class="mem_login_tishi" id="Dt_mem_login_tishi"></div>
+                    <ul class="sjd_ul">
+                        <li>手机号<input type="tel" placeholder="已验证手机号" name="user_name" id="Dt_user_name" maxlength="11" autocomplete="off"></li>
+                        <!-- <li>
+                            验证码
+                            <input placeholder="输入验证码" name="_vcode" id="Dt__vcode" type="text" autocomplete="off" maxlength="6">
+                            <div class="sjd_img"><img src="/util/vcode?_vkey=863a53eb0bc1b7da9d0b4b51be0e43b9" id="Dt_mem_login_code" /></div>
+                            <div class="clear"></div>
+                            <input type="hidden" name="_vkey" id="Dt__vkey" value="863a53eb0bc1b7da9d0b4b51be0e43b9" autocomplete="off">
+                        </li> -->
+                        <li>动态密码<input type="tel" placeholder="输入动态密码" name="psw" id="Dt_psw" autocomplete="off" maxlength="6">
+                            <a href="javascript:void(0)" class="shortmessage" id="shortmessage">获取动态密码</a>
+                        </li>
+                    </ul>
+
+                    <div class="sjd_qd"><a href="javascript:void(0)" id="Dt_mem_login_btn">登录</a></div>
+
+                    <!-- <div class="keep_login displaynone"><input name="keep_login" type="checkbox" class="keep_login_input" value="1" checked><span>一个月内免登陆</span></div> -->
+                </form>
+            </div>
+
+
+
+        </div>
+
+
+
+
+        <!-- <div class="sjd_fo displaynone">
+            <a href="/accounts/changesmspsw" class="wangji">忘记密码</a><a href="/accounts/register" class="sjd_dr">快速注册</a>
+            <div class="clear"></div>
+        </div> -->
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/xin_xly_sj.js"></script>
+    <!-- <script src="js/jquery.validator.js?local=zh-CN"></script> -->
+
+
+
+    <!-- <script type="text/javascript" charset="utf-8" src="js/10092358.js"></script> -->
+    <script>
+        $(function() {
+
+            var countdown = 60;
+
+            function settime(val) {
+                if (countdown == 0) {
+                    val.removeAttribute("disabled");
+                    val.innerHTML = "免费获取验证码";
+                    countdown = 60;
+                } else {
+                    val.setAttribute("disabled", "disabled");
+                    val.innerHTML = "" + countdown + "秒后再获取";
+                    countdown--;
+                    setTimeout(function() {
+                        settime(val)
+                    }, 1000)
+                }
+
+            }
+
+            $('#shortmessage').click(function() {
+                var phone = $('#Dt_user_name').val();
+                if (!phone || phone.length != 11) {
+                    alert("请输入正确的手机号");
+                    return;
+                }
+
+                if (countdown == 60)
+                    settime(this);
+
+                $.getJSON(urlString + "g=Api&m=CommonApi&a=sendCode&phone=" + phone,
+                    function(data) {
+                        console.log(data);
+                    }
+                );
+
+            });
+
+            $('#Dt_mem_login_btn').click(function() {
+
+                var phone = $('#Dt_user_name').val();
+                var code = $('#Dt_psw').val();
+
+                if (!phone || phone.length != 11) {
+                    alert("请输入正确的手机号");
+                    return;
+                }
+
+                if (!code || code.length != 6) {
+                    alert("请输入正确的动态密码");
+                    return;
+                }
+
+                var params = {
+                    phone: phone,
+                    code: code
+                }
+                console.log(params)
+                $.ajax({
+                    type: 'POST',
+                    url: urlString + "g=Api&m=CommonApi&a=login",
+                    data: params,
+                    contentType: 'application/x-www-form-urlencoded;',
+                    success: function(data) {
+                        var token = JSON.parse(data).token;
+                        localStorage.setItem("token", token);
+                        localStorage.setItem("u_phone", phone);
+                        // window.location.href = 'orderList.html';
+                        window.history.go(-1);
+                    }
+                });
+
+
+
+            });
+
+        });
+    </script>
+</body>
+
+</html>

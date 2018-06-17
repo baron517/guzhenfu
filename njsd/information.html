@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>2018上海交大科技创新青少年研学夏令营</title>
+    <meta name="keywords" content="2018上海交大科技创新青少年研学夏令营" />
+    <meta name="description" content="2018上海交大科技创新青少年研学夏令营" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link href="css/sj_xly.main.css" rel="stylesheet" type="text/css" />
+    <link href="css/dialog.css" rel="stylesheet" type="text/css" />
+    <!--[if lt IE 9]><script type="text/javascript" src="//img1.xhdxly.com/2016/mobile/html5shiv.js"></script><![endif]-->
+</head>
+
+<body>
+    <script type="text/javascript">
+        // 防止该页面被其他页面iframe住
+        if (window != window.parent) {
+            window.parent.location = '/';
+        }
+    </script>
+    <div class="sjx_head" id="sjx_head">
+        <div class="sjx_hleft" id="mobilegoback"><i class="iconfont"></i></div>
+        <div class="h_img"><img src="img/sj_xlogo2.png"></div>
+        <div class="s-title">确认订单</div>
+        <!-- <div class="sjx_hright"><a href="javascript:void(0)"><i class="iconfont ri2" style="top:6px">...</i></a></div> -->
+        <div class="clear"></div>
+
+    </div>
+    <div class="auto" id="mem_app_main">
+        <form id="order">
+
+
+
+            <div class="mem_app2">
+                <div class="sjk_xx">
+                    <div>
+                        <span class="sjk_qq"><i class="iconfont">&#xe6c6;</i></span>开营信息
+                        <a class="mem_app2_b1_right ljts" id="1309"><img src="img/garbage.png" style="height: 15px; width: 15px;"></a>
+                    </div>
+                </div>
+                <div class="sjk_xul">
+                    <ul>
+                        <li>线路名称：<span id="addrName"></span></li>
+                        <li>机构名称：<span>2018上海交大科技创新青少年研学夏令营</span></li>
+                        <li>营期时间：<span id="projDate"></span></li>
+
+                    </ul>
+                </div>
+                <div class="mem_app2_b2_info">
+
+                    <div class="page-form">
+                        <div class="sjk_xx">
+                            <span class="sjk_qq"><i class="iconfont">&#x3433;</i></span>填写学员信息<span class="mem_app2_b2_info1_l"><span>1</span></span>
+                            <a class="mem_app2_b2_info1_r ljts" href="javascript:void(0);"><img src="img/garbage.png" style="height: 15px; width: 15px;"></a>
+                        </div>
+                        <div class="sjk_xy">
+                            <ul>
+                                <li>学生姓名：<input type="text" class="sjk_wb student_name" autocomplete="off"></li>
+                                <li>性别：<input type="radio" class="sjk_dx student_sex" name="stud_sex[0]" value="0" checked>男 <input type="radio" class="sjk_dx student_sex" name="stud_sex[0]" value="1">女 </li>
+                                <li>手机号码：<input type="tel" class="sjk_wb student_phone" autocomplete="off" maxlength="11"></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- <div class="page-form">
+                        <div class="sjk_xx">
+                            <span class="sjk_qq"><i class="iconfont">&#x3433;</i></span>填写学员信息<span class="mem_app2_b2_info1_l"><span>2</span></span>
+                            <a class="mem_app2_b2_info1_r ljts" href="javascript:void(0);"><img src="img/garbage.png" style="height: 15px; width: 15px;"></a>
+                        </div>
+                        <div class="sjk_xy">
+                            <ul>
+                                <li>学生姓名：<input type="text" class="sjk_wb student_name" autocomplete="off"></li>
+                                <li>性别：<input type="radio" class="sjk_dx student_sex" name="stud_sex[1]" value="0" checked>男 <input type="radio" class="sjk_dx student_sex" name="stud_sex[1]" value="1">女 </li>
+                                <li>手机号码：<input type="tel" class="sjk_wb student_phone" autocomplete="off" maxlength="11"></li>
+                            </ul>
+                        </div>
+                    </div> -->
+
+                </div>
+                <div class="sjk_zjli"><a class="mem_app2_add_stu" href="javascript:void(0);"><span class="sjk_zj"><i class="iconfont">&#xe601;</i></span>增加一个新成员</a></div>
+            </div>
+
+
+
+        </form>
+    </div>
+    <div class="h50"></div>
+    <div class="auto">
+        <div class="sjk_tjdd"><span><a href="#" title="" target="_blank" style=" display: none">实付款：￥<b>4580</b>.00</a></span><a href="javascript:void(0);" class="mem_app2_bot_refer">提交订单</a> </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/xin_xly_sj.js"></script>
+    <script src="js/dialog.js"></script>
+    <script src="js/zepto.min.js"></script>
+    <script>
+        $(function() {
+            var date = GetQueryString("date");
+            var title = GetQueryString("title") + " (第" + GetQueryString("index") + "期)";
+            $('#addrName').append(title);
+            $('#projDate').append(date);
+            var proid = GetQueryString("id");
+            var u_phone = localStorage.getItem("u_phone");
+            var price = GetQueryString("price");
+
+            var role = localStorage.getItem("role");
+            if (!role) {
+                role = 'admin';
+            }
+
+            // alert(price)
+            // var proid = "11";
+            // var u_phone = "18513212904";
+
+            $('.mem_app2_bot_refer').on('click', function() {
+
+                //var length = $('.mem_app2_b2_info').find('.page-form').length;
+
+                var stuList = [];
+                $('.mem_app2_b2_info').find('.page-form').each(function(index) {
+                    var me = $(this);
+                    var student_name = me.find('.student_name').val();
+                    var student_phone = me.find('.student_phone').val();
+                    var student_sex = $("input[name='stud_sex[" + index + "']:checked").val();
+
+                    if (index == 0) {
+                        if (!student_name) {
+                            alert("请输入学员姓名");
+                            return false;
+                        }
+
+                        if (!student_phone) {
+                            alert("请输入学员手机号码");
+                            return false;
+                        }
+                    } else {
+                        if (!student_name) {
+                            return;
+                        }
+
+                        if (!student_phone) {
+                            return;
+                        }
+                    }
+
+
+                    var stuItem = {
+                        p_id: proid,
+                        u_phone: u_phone,
+                        create_time: new Date().getTime(),
+                        name: student_name,
+                        o_phone: student_phone,
+                        sex: student_sex == 0 ? '男' : '女',
+                        title: title,
+                        price: price,
+                        role: role,
+                        days_range: date
+                    };
+
+                    stuList.push(stuItem);
+
+                });
+
+
+
+                var params = {
+                    list: JSON.stringify(stuList)
+                };
+
+                console.log(params);
+
+                $.ajax({
+                    type: 'POST',
+                    url: urlString + "g=Api&m=CommonApi&a=order",
+                    data: params,
+                    dataType: 'JSON',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    success: function(data) {
+                        console.log(data)
+                            //toastr.info('下单成功');
+
+                        $(document).dialog({
+                            type: 'toast',
+                            infoIcon: 'img/success.png',
+                            infoText: '下单成功',
+                            autoClose: 2000
+                        });
+                        setTimeout(function() {
+                            window.location.href = "orderList.html"
+                        }, 2000);
+                        // window.location.href = "order.html?title=" + title + "&price=" + price + "&date=" + date;
+                        // window.location.href = "orderList.html?title=" + title + "&price=" + price + "&date=" + date;
+                    }
+                });
+
+                // var stud1Name = $('#stud1_name').val();
+                // var stud1Phone = $('#stud1_phone').val();
+
+                // if (!stud1Name) {
+                //     alert("请输入学员姓名");
+                //     return;
+                // }
+
+                // if (!stud1Phone) {
+                //     alert("请输入学员手机号码");
+                //     return;
+                // }
+
+
+                // var stud1Sex = $("input[name='stud1_sex']:checked").val();
+
+
+            });
+
+        });
+    </script>
+
+    <script>
+        (function($) {
+
+            $.extend({
+                mobileapi: {
+                    page: function() {
+                        function tanchukuang() {
+                            var tck = $("#tanchukuang"),
+                                page = $("#yk-tck");
+                            if (tck.length > 0 && page.length > 0) {
+                                tck.unbind("click").bind("click", function() {
+                                    if (!$(this).hasClass("active")) {
+                                        page.css({
+                                            "display": "block"
+                                        }), $(this).addClass("active");
+                                    } else {
+                                        page.css({
+                                            "display": "none"
+                                        }), $(this).removeClass("active");
+                                    }
+                                })
+                            }
+                        }
+
+                        function tanchukuanghide() {
+                            $("#yk-tck-mask").on("click", function() {
+                                var tck = $("#tanchukuang"),
+                                    page = $("#yk-tck");
+                                $("#yk-tck").css({
+                                    'display': 'none'
+                                });
+                                page.css({
+                                    "display": "none"
+                                }), tck.removeClass("active");
+                            })
+                        }
+                        tanchukuang();
+                        tanchukuanghide();
+                    },
+                    daohang: function() {
+                        $(".sjx_hright").click(function() {
+                            $(".dj_sj_w").toggleClass("active");
+                        });
+                    }
+                }
+            })
+        })(jQuery);
+
+        $(function() {
+
+            $.mobileapi.page();
+            $.mobileapi.daohang();
+
+
+        });
+        var login = function() {
+            var href = location.href,
+                arr = href.split('?'),
+                url = arr[0];
+            return location.href = "https://user.m.xialingying.cc/accounts/login?u=" + escape(url).replace(/\//g, "%2F"), !1
+        };
+        var regist = function() {
+            var href = location.href,
+                arr = href.split('?'),
+                url = arr[0];
+            return location.href = "https://user.m.xialingying.cc/accounts/register?u=" + escape(url), !1
+        };
+    </script>
+    <script type="text/javascript" charset="utf-8" src="js/10092358.js"></script>
+    <script>
+        $(function() {
+
+            $.information.clickAddStudent();
+            // // $.information.clickMoreINfo();
+            // $.information.delStudent();
+            // $.information.delPage();
+            // $.information.additionalShowHide();
+            // //$.information.focusInput();
+            // $.information.confirmOrder();
+
+
+
+
+        });
+        (function($) {
+
+            $.extend({
+                information: {
+                    clickMoreINfo: function() {
+                        $('.mem_app2_more_a').unbind('click').bind('click', function() {
+                            var me = $(this);
+                            if (!me.hasClass('on')) {
+                                $.information.addMoreInfo(me);
+                            } else {
+                                me.parent().parent().find('.add-more-info-form').remove();
+                                me.removeClass('on');
+
+                            }
+                            return false;
+                        });
+                    },
+                    addMoreInfo: function(me) {
+                        var page = me.parent();
+                        var html = '<div class="add-more-info-form"><div class="mem_app2_line"></div><div class="mem_app2_info_list1"><div class="mem_app2_info_list1_l"><div class="">出生年月</div></div><input name="student_age[' + parseInt(me.attr('id')) + '][]"type="text"class="mem_app2_info_list1_m student_age"autocomplete="off"onclick="calendar.show(this);" readonly="readonly"/></div><div class="mem_app2_info_list1 city-form"><div class="mem_app2_info_list1_l"><div class="">所在城市</div></div><select name="student_city1[' + parseInt(me.attr('id')) + '][]"class="mem_app2_info_list1_c1 prov student_city1"></select><select name="student_city2[' + parseInt(me.attr('id')) + '][]"class="mem_app2_info_list1_c2 city student_city2"disabled="disabled"></select></div><div class="mem_app2_info_list1"><div class="mem_app2_info_list1_l"><div class="">地址</div></div><input name="student_address[' + parseInt(me.attr('id')) + '][]"type="text"class="mem_app2_info_list1_pos student_address"autocomplete="off"/></div></div>';
+                        page.after(html);
+                        me.addClass('on');
+                        $.information.city(me);
+                    },
+                    city: function(me) {
+                        var page = me.parent().parent().find('.city-form');
+                        page.citySelect({
+                            prov: "北京",
+                            city: "东城区"
+                        });
+                    },
+                    addStudent: function(me) {
+                        var page = me.parent().parent().find('.mem_app2_b2_info');
+                        var num = page.find('.page-form').length;
+                        if (num >= 20) {
+                            alert('已达上限，请先提交后再继续');
+                            return;
+                        }
+                        var html = '<div class="page-form"><div class="sjk_xx"><span class="sjk_qq"><i class="iconfont">&#x3433;</i></span>填写学员信息<span class="mem_app2_b2_info1_l"><span>' + (num + 1) + '</span></span><a class="mem_app2_b2_info1_r ljts" href="javascript:void(0);" id="' + parseInt(me.attr('id')) + '"><img src="img/garbage.png" style="height: 15px; width: 15px;"></a></div><div class="sjk_xy"><ul><li>学生姓名：<input type="text" class="sjk_wb student_name" autocomplete="off" name="stud_sex[' + parseInt(me.attr('id')) + '][]"></li><li>性别：<input type="radio" class="sjk_dx student_sex"name="student_sex[' + parseInt(me.attr('id')) + '][' + (num) + ']" value="0" checked>男 <input type="radio" class="sjk_dx student_sex" name="student_sex[' + parseInt(me.attr('id')) + '][' + (num) + ']" value="1">女 </li><li>手机号码：<input type="tel" class="sjk_wb student_phone" autocomplete="off" name="student_phone[' + parseInt(me.attr('id')) + '][]" maxlength="11"></li></ul></div></div>';
+                        page.append(html);
+
+                    },
+                    clickAddStudent: function() {
+                        $('.mem_app2_add_stu').unbind('click').bind('click', function() {
+                            var me = $(this);
+                            var cid = parseInt(me.attr('id'));
+
+                            $.information.addStudent(me);
+
+                            // $.ajax({
+                            //     url: '/gate/_changenum',
+                            //     data: {
+                            //         'cid': cid,
+                            //         'type': 2
+                            //     },
+                            //     type: 'post',
+                            //     dataType: 'json',
+                            //     success: function(data) {
+                            //         if (data.err != 'kungfu.ok') {
+                            //             alert('操作失败');
+                            //             return;
+                            //         }
+                            //         var status = data.data.status;
+                            //         if (status != 'ok') {
+                            //             alert('操作失败');
+                            //             return;
+                            //         } else {
+                            //             $.information.addStudent(me);
+                            //             $.information.clickMoreINfo();
+                            //             $.information.delStudent();
+                            //             //  $.information.focusInput();                                         
+                            //         }
+                            //     }
+                            // })
+
+                            return;
+                        });
+                    },
+                    delStudent: function() {
+                        $('.mem_app2_b2_info1_r').unbind('click').bind('click', function() {
+                            var me = $(this);
+                            var page = me.parent().parent().parent().find('.page-form'),
+                                len = page.length;
+                            if (len == 1) {
+                                alert('请至少保留一名学员信息');
+                                return false;
+                            }
+                            var cid = parseInt(me.attr('id'));
+                            $.ajax({
+                                url: '/gate/_changenum',
+                                data: {
+                                    'cid': cid,
+                                    'type': 1
+                                },
+                                type: 'post',
+                                dataType: 'json',
+                                success: function(data) {
+                                    if (data.err != 'kungfu.ok') {
+                                        alert('操作失败');
+                                        return;
+                                    }
+                                    var status = data.data.status;
+                                    if (status != 'ok') {
+                                        alert('操作失败');
+                                        return;
+                                    } else {
+                                        $.information.ReSort(me)
+                                        me.parent().parent().remove();
+                                    }
+                                }
+                            })
+                        })
+                    },
+                    ReSort: function(me) {
+                        var page = me.parent().parent().parent().find('.page-form'),
+                            len = page.length;
+                        if (len == 1) {
+                            alert('请至少保留一名学员信息');
+                            return false;
+                        }
+                        var index = me.parent().parent().index() + 1;
+                        for (var i = 1; i <= len; i++) {
+                            if (i == index) {
+                                continue;
+                            }
+                            if (i < index) {
+                                page.eq(i - 1).find('.mem_app2_b2_info1_l > span').html(i);
+                            } else {
+                                page.eq(i - 1).find('.mem_app2_b2_info1_l > span').html(i - 1);
+                            }
+
+                        }
+
+
+                    },
+                    delPage: function() {
+                        $('.mem_app2_b1_right').unbind('click').bind('click', function() {
+                            var me = $(this);
+                            var cid = this.id;
+                            if (confirm('确定删除此课程？')) {
+
+
+                                $.ajax({
+                                    async: false,
+                                    url: '/gate/_del',
+                                    data: {
+                                        'cid': cid
+                                    },
+                                    type: 'post',
+                                    dataType: 'jsonp',
+                                    jsonp: 'callback',
+                                    jsonpCallback: 'writegwkdel',
+                                    success: function(data) {
+
+                                        var status = data.status;
+                                        if (status != 'ok') {
+                                            switch (status) {
+                                                case 'empty':
+                                                    location.href = '/';
+                                                    break;
+                                                default:
+                                                    alert('操作失败');
+                                                    break;
+                                            }
+
+                                            return;
+                                        } else {
+                                            me.parent().parent().parent().remove();
+                                        }
+                                    }
+                                })
+
+                            }
+
+                        })
+                    },
+                    additionalShowHide: function() {
+                        $('.additional').unbind('click').bind('click', function() {
+                            var page = $(this).parent().next('div');
+                            if (!$(this).hasClass('on')) {
+                                page.css({
+                                    'display': 'block'
+                                });
+                                $(this).addClass('on');
+                            } else {
+                                page.css({
+                                    'display': 'none'
+                                });
+                                $(this).removeClass('on');
+                            }
+                        })
+                    },
+                    CommonInfo: function() {
+                        var page = $('#mem_app_main'),
+                            num = page.find('.mem_app2').length;
+                        if (num < 2) {
+                            return;
+                        }
+                        var yuan = page.find('.mem_app2').eq(0).find('.page-form');
+                        var li = '';
+                        yuan.each(function() {
+                            var name = $(this).find('.student_name').val();
+                            var phone = $(this).find('.student_phone').val();
+                            if (!name || !phone) {
+                                return true;
+                            }
+                            li += '<li><b>' + name + '</b><span>' + phone + '</span></li>';
+                        });
+                        return li;
+                    },
+                    focusInput: function() {
+
+                        var page = $('#mem_app_main');
+                        var inputpage = page.find('.mem_app2:gt(0)');
+                        inputpage.find('.student_name').on('focus', function() {
+                            var html = $.information.CommonInfo();
+                            if (!html) {
+                                return;
+                            }
+                            var select = '<div class="common-page"><div class="common-page-t"><strong>选择常用学员</strong>自动填充学员信息</div><ul class="common-page-ul">' + html + '</ul></div>';
+                            $(this).parent().append(select);
+                            $.information.fillInput();
+                        });
+
+                        $.information.blurInput();
+
+                    },
+                    blurInput: function() {
+                        var page = $('#mem_app_main');
+                        page.find('.student_name').on('blur', function() {
+                            $('.common-page').remove();
+                        });
+                    },
+                    fillInput: function() {
+                        var page = $('.common-page').find('.common-page-ul');
+                        var yuanpage = $('#mem_app_main').find('.mem_app2:eq(0)').find('.page-form');
+                        page.find('li').unbind('mousedown').bind('mousedown', function() {
+                            var index = $(this).index();
+                            var name = yuanpage.eq(index).find('.student_name').val();
+                            var phone = yuanpage.eq(index).find('.student_phone').val();
+                            var sex = yuanpage.eq(index).find('.student_sex:checked').val();
+
+                            $(this).closest('.mem_app2_info_list').find('.student_name').val(name);
+                            $(this).closest('.mem_app2_info_list').find('.student_phone').val(phone);
+                            $(this).closest('.mem_app2_info_list').find('.mem_app2_info_list1_r').find('input[value=' + sex + ']').prop("checked", true);
+
+                            var me = $(this).closest('.mem_app2_info_list').find('.mem_app2_more_a');
+                            if (!me.hasClass('on') && yuanpage.eq(index).find('.mem_app2_more_a').hasClass('on')) {
+                                $.information.addMoreInfo(me);
+                            }
+                            if (me.hasClass('on') && !yuanpage.eq(index).find('.mem_app2_more_a').hasClass('on')) {
+                                me.parent().parent().find('.add-more-info-form').remove();
+                                me.removeClass('on');
+
+                            }
+                            if (me.hasClass('on')) {
+                                var age = yuanpage.eq(index).find('.student_age').val();
+                                var city1 = yuanpage.eq(index).find('.student_city1 option:selected').val();
+                                var city2 = yuanpage.eq(index).find('.student_city2 option:selected').val();
+                                var address = yuanpage.eq(index).find('.student_address').val();
+                                $(this).closest('.mem_app2_info_list').find('.student_age').val(age);
+                                $(this).closest('.mem_app2_info_list').find('.student_address').val(address);
+                                $(this).closest('.mem_app2_info_list').find('.city-form').citySelect({
+                                    prov: city1,
+                                    city: city2
+                                });
+                            }
+                        })
+                    },
+                    confirmOrder: function() {
+                        $('.mem_app2_bot_refer').on('click', function() {
+                            var page = $('#mem_app_main');
+                            var methis = $(this);
+                            var result = true;
+                            page.find('.mem_app2').each(function() {
+
+                                var mythis = $(this);
+                                var allname = $.information.sameName(mythis);
+
+
+                                $(this).find('.page-form').each(function() {
+                                    var me = $(this);
+                                    var student_name = me.find('.student_name');
+                                    var student_phone = me.find('.student_phone');
+                                    var student_age = me.find('.student_age');
+                                    var student_city1 = me.find('.student_city1');
+                                    var student_city2 = me.find('.student_city2');
+                                    var student_address = me.find('.student_address');
+
+
+
+
+                                    var nameval = student_name.val();
+
+                                    if (!nameval) {
+                                        alert('您好，请输入姓名');
+                                        student_name.focus();
+                                        result = false;
+                                        return false;
+                                    } else {
+
+                                        var newAllName = allname.replace(nameval + ',', "");
+                                        if (newAllName.indexOf(',' + nameval + ',') > -1) { //当前值和newValue作比较
+                                            alert('您好，一人不能同时报多次相同课程');
+                                            student_name.val('');
+                                            result = false;
+                                            return false;
+                                        }
+
+
+
+
+                                        var reg = /^([A-Za-z]|[\u4E00-\u9FA5])+$/;
+                                        if (!student_name.val().match(reg)) {
+                                            alert('您好，请输入正确的姓名');
+                                            student_name.focus();
+                                            result = false;
+                                            return false;
+                                        }
+                                        if (student_name.val().length > 50 || student_name.val().length < 2) {
+                                            alert('您好，请输入正确的姓名');
+                                            student_name.focus();
+                                            result = false;
+                                            return false;
+                                        }
+                                    }
+                                    if (!student_phone.val()) {
+                                        alert('您好，请输入手机号');
+                                        student_phone.focus();
+                                        result = false;
+                                        return false;
+                                    } else {
+                                        var reg = /^1[3-9]\d{9}$/;
+                                        if (!student_phone.val().match(reg)) {
+                                            alert('您好，请输入正确的手机号');
+                                            student_phone.focus();
+                                            result = false;
+                                            return false;
+                                        }
+                                    }
+                                    if (student_age.length) {
+                                        if (student_age.val()) {
+                                            var reg = /\d{4}-\d{2}-\d{2}/;
+                                            if (!student_age.val().match(reg)) {
+                                                alert('您好，请输入yyyy-mm-dd格式');
+                                                student_age.focus();
+                                                result = false;
+                                                return false;
+                                            }
+                                        }
+                                    }
+                                    if (student_city1.length) {
+                                        if (student_city1.val()) {
+                                            var reg = /^[\u4e00-\u9fa5](\s*[\u4e00-\u9fa5])*$/;
+                                            if (!student_city1.val().match(reg)) {
+                                                alert('您好，只允许输入汉字');
+                                                student_city1.focus();
+                                                result = false;
+                                                return false;
+                                            }
+                                        }
+                                    }
+                                    if (student_city2.length) {
+                                        if (student_city2.val()) {
+                                            var reg = /^[\u4e00-\u9fa5](\s*[\u4e00-\u9fa5])*$/;
+                                            if (!student_city2.val().match(reg)) {
+                                                alert('您好，只允许输入汉字');
+                                                student_city2.focus();
+                                                result = false;
+                                                return false;
+                                            }
+                                        }
+                                    }
+                                    if (student_address.length) {
+                                        if (student_address.val()) {
+                                            var reg = /^([A-Za-z]|[(),.-_""，。（）-]|[\u4E00-\u9FA5])+$/;
+                                            if (!student_address.val().match(reg)) {
+                                                alert('您好，请不要输入特殊符号');
+                                                student_address.focus();
+                                                result = false;
+                                                return false;
+                                            }
+                                            if (student_address.val().length > 100) {
+                                                alert('您好，请不要超出100个字符');
+                                                student_address.focus();
+                                                result = false;
+                                                return false;
+                                            }
+                                        }
+                                    }
+                                })
+
+                                if (!result) {
+                                    result = false;
+                                    return false;
+                                }
+                            })
+
+                            if (!result) {
+                                return false;
+                            }
+
+                            var parent_name = page.find('.parent_name');
+                            var parent_phone = page.find('.parent_phone');
+                            var remark = page.find('.remark');
+                            if (parent_name.val()) {
+                                var reg = /^([A-Za-z]|[\u4E00-\u9FA5])+$/;
+                                if (!parent_name.val().match(reg)) {
+                                    alert('您好，请输入正确的姓名');
+                                    parent_name.focus();
+                                    return false;
+                                }
+                            }
+                            if (parent_phone.val()) {
+                                var reg = /^1[3-9]\d{9}$/;
+                                if (!parent_phone.val().match(reg)) {
+                                    alert('您好，请输入正确的手机号');
+                                    parent_phone.focus();
+                                    return false;
+                                }
+                            }
+                            if (remark.val()) {
+                                var reg = /^([A-Za-z]|[(),.-_""，。（）-]|[\u4E00-\u9FA5])+$/;
+                                if (!remark.val().match(reg)) {
+                                    alert('您好，请不要输入特殊符号');
+                                    remark.focus();
+                                    return false;
+                                }
+                                if (remark.val().length > 200) {
+                                    alert('您好，请不要超出100个字符');
+                                    remark.focus();
+                                    return false;
+                                }
+                            }
+                            if (methis.hasClass('on')) {
+                                return false;
+                            }
+                            methis.addClass('on');
+                            $.ajax({
+                                url: '/information/_order_v2',
+                                data: $('#order').serialize(),
+                                type: 'post',
+                                dataType: 'json',
+                                success: function(data) {
+
+                                    methis.removeClass('on');
+                                    if (data.err != 'kungfu.ok') {
+                                        switch (data.err) {
+                                            default: alert(data.err);
+                                            //console.log(data.err);
+                                            return false;
+                                        }
+                                        return false;
+                                    }
+                                    var status = data.data.status;
+                                    if (status != 'ok') {
+                                        //alert(status);
+                                        //console.log(status);
+                                        return false;
+                                    } else {
+
+                                        location.href = '/information/ok_v2';
+                                    }
+                                }
+                            })
+                        })
+                    },
+                    sameName: function(me) {
+                        var page = me.find('.student_name');
+                        var namees = '';
+                        page.each(function() {
+                            var value = $(this).val();
+                            namees += value + ',';
+                        })
+
+                        return ',' + namees;
+                    }
+                }
+            })
+        })(jQuery);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="utf-8">
+    <title>2018上海交大科技创新青少年研学夏令营</title>
+    <meta name="keywords" content="2018上海交大科技创新青少年研学夏令营" />
+    <meta name="description" content="2018上海交大科技创新青少年研学夏令营" />
+    <link rel="stylesheet" href="css/xin_con.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <script src="js/jquery.min.js"></script>
+
+    <script>
+        window.pageConfig = {
+            screen: true
+        }
+    </script>
+</head>
+
+<body>
+    <div class="auto zx_he_ss">
+        <div class="searchHead">
+            <a href="javascript:void(0);" id="mobilegoback"> <i class="search-head-back iconfont">&#xe601;</i></a>
+            <div class="search-bar">
+                <div class="search-right">
+
+
+                    <i class="fangdajin iconfont">&#xe61f;</i>
+                    <input type="search" class="input" onsearch="search()" id="keyword" value="搜索" name="keyword">
+
+
+                </div>
+
+            </div>
+        </div>
+        <div class="h45"></div>
+    </div>
+    <form action="#" id="sort_form" method="get">
+        <input type="hidden" name="b" value="2">
+        <input type="hidden" name="play" value="0">
+        <input type="hidden" name="cid" value="0">
+        <input type="hidden" name="attr" value="0">
+        <input type="hidden" name="stime" value="0">
+
+        <input type="hidden" name="sort" value="1">
+        <!--    <input type="hidden" name="st" value="">
+    <input type="hidden" name="en" value="">-->
+        <input type="hidden" name="ev" value="">
+        <div class="auto xly-bj he_xly-bj">
+            <div class="xly-ss-t">
+                <ul class="xly-ss-t-ul clear">
+                    <li>
+                        <a class="se_main1_t1_a f_sort_a " href="javascript:; " id="sort_5 ">
+                            <div class="lix_d "><s>价格<b></b></s></div>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+    </form>
+
+    <div class="auto xly-bj xx-xly-search " style="display: none">
+        <div class="xly-ss-jg xly-ss-jg-on excellen " id="excellent_cen " style="display: block; ">
+            <ul class="xly-ss-jg-ul clear " style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px); ">
+                <li><a href="#"> 国内冬夏令营<s>x</s></a></li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <script>
+        var asc = "";
+
+        function getProListOrderByPrice(asc) {
+            var key = $("#keyword").val();
+
+            var url = "";
+
+            if (key) {
+                url = urlString + "g=Api&m=CommonApi&a=getProList&title=" + key;
+            } else {
+                url = urlString + "g=Api&m=CommonApi&a=getProList";
+            }
+
+            $.getJSON(url,
+                function(data) {
+                    // console.log(data);
+                    var newData = [];
+                    if (asc) {
+                        data.reduce(function(pre, item) {
+                            if (!item["price"]) {
+                                item["price"] = "0";
+                            }
+                            return item;
+                        }, 0);
+                        // console.log(data);
+                        newData = data.sort(function(a, b) {
+                            var aDays = 0,
+                                bDays = 0;
+                            aDays = parseInt(a.price);
+                            bDays = parseInt(b.price);
+                            // console.log(aDays + "---" + bDays);
+                            return aDays - bDays;
+                        });
+
+                        console.log(newData);
+                    } else {
+                        data.reduce(function(pre, item) {
+                            if (!item["price"]) {
+                                item["price"] = "0";
+                            }
+                            return item;
+                        }, 0);
+                        // console.log(data);
+                        newData = data.sort(function(a, b) {
+                            var aDays = 0,
+                                bDays = 0;
+                            aDays = parseInt(a.price);
+                            bDays = parseInt(b.price);
+                            // console.log(aDays + "---" + bDays);
+                            return bDays - aDays;
+                        });
+
+                        console.log(newData);
+                    }
+
+                    var html = "";
+                    newData.reduce(function(pre, item) {
+                        html += " <li><a href='detail.html?id=" + item.id + "'><h3>" +
+                            item.title + "</h3><div class='xly-ssc-img'><img src=' " +
+                            imgHead + item.img + " ' alt=' " +
+                            item.title + "'></div><div class='xly-ssc-r'><p>" + item.brief +
+                            "<strong>￥" + item.price + "<s>/" + item.trip_days + "</s></strong></p><div class='ssc_san'><span>适合对象：" +
+                            item.target + "</span> </div><div class='ssc_biaoq'>";
+
+                        if (item.type_list) {
+                            var typeList = item.type_list.split(",");
+                            typeList.reduce(function(pre, current) {
+                                html += " <span>" + current + "</span> ";
+                                return current;
+                            }, 0)
+                        }
+                        html += "<div class='clear'></div></div></div></a></li> ";
+
+
+                    }, 0);
+                    // html += '</ul>'
+                    //console.log(html);
+                    $('.xly-ss-c-ulss').empty();
+                    $('.xly-ss-c-ulss').append(html);
+
+                });
+        }
+
+        $(function() {
+            var sort_form = $("#sort_form ");
+
+            sort_form.find(".f_sort_a ").on("click ", function() {
+                var ids = this.id,
+                    name = ids.split("_ ")[0],
+                    value = ids.split("_ ")[1];
+                sort_form.find("input[name=" + name + " ] ").val(value);
+                sort_form.submit();
+
+                if (asc) {
+                    asc = "";
+                } else {
+                    asc = "asc";
+                }
+                getProListOrderByPrice(asc);
+            });
+
+            sort_form.find(".ss_paixu ").find("li ").on("click ", function() {
+                    var ids = this.id,
+                        name = ids.split("_ ")[0],
+                        value = ids.split("_ ")[1];
+                    sort_form.find("input[name=" + name + " ] ").val(value);
+                    sort_form.submit();
+                })
+                //    sort_form.find("#queren ").on("click ",function(){
+                //        var st = sort_form.find("#startDate ").val();
+                //        var en = sort_form.find("#endDate ").val();
+                //        sort_form.find("input[name=st] ").val(st.replace(/-/g," "));
+                //        sort_form.find("input[name=en] ").val(en.replace(/-/g," "));
+                //        sort_form.submit();
+                //    });
+            sort_form.find("#quxiao ").on("click ", function() {
+                sort_form.find("input[name=stime] ").val(" ");
+
+                sort_form.submit();
+
+            });
+        })
+    </script>
+    <div class="auto ">
+        <div class="ss_con_ul ">
+            <ul class="xly-ss-c-ul xly-ss-c-ulss " id="jxhdLbUl ">
+
+
+            </ul>
+        </div>
+    </div>
+    <form id="pageform " style="display: none; ">
+        <input type="hidden " name="b " value="2 ">
+        <input type="hidden " name="play " value="0 ">
+        <input type="hidden " name="cid " value="0 ">
+        <input type="hidden " name="attr " value="0 ">
+        <input type="hidden " name="stime " value="0 ">
+        <input type="hidden " name="sort " value="1 ">
+        <!--    <input type="hidden " name="st " value=" ">
+    <input type="hidden " name="en " value=" ">-->
+        <input type="hidden " name="total " value="977 ">
+        <input type="hidden " name="pn " value="1 ">
+        <input type="hidden " name="ev " value=" ">
+    </form>
+    <div class="mask_calendar ">
+        <div class="calendar "></div>
+    </div>
+    <div class="ss_mark " id="ss_mark "></div>
+    <div class="xly-fhdbss " id="gotopss "><span></span></div>
+
+    <div style="width: 100%; text-align: center;">
+        <img src="img/gongzhonghao.png" style="height: 100px; width: 100px; display: block; margin: 20px auto;">
+        <span>公众号</span>
+    </div>
+
+    <div class="xly-phone auto "><i class="iconfont "></i>全国咨询热线：4001030357</div>
+    <script src="js/kecheng.js "></script>
+    <script src="js/m.sj_jquery.js "></script>
+    <script src="js/xin_xly_sj.js "></script>
+    <script src="js/search.js "></script>
+    <script src="js/date.js "></script>
+    <script src="js/m.course_jquery.js "></script>
+    <script>
+        $(function() {
+            $("body ").delegate(".li-time ", "click ", function() {
+                $("#J-course-navbar-filter-wrap-loader ").removeClass("g-hidden ");
+                $(".li-time ").removeClass("selected ");
+                $(this).addClass("selected ");
+                var id = $(this).find("a ").attr("id ");
+
+                var h = $(this).find("a div span ").text();
+                $(".filter-time ").find("i ").html(h);
+                if (id) {
+                    var arr;
+                    var hrf = $(this).find("a ").attr("data-href ");
+                    if (hrf) {
+                        arr = hrf.substring(0, hrf.lastIndexOf("# "));
+                    } else {
+                        arr = $(".filter-confirm ").find("a ").attr("href ");
+                    }
+                    var ev = $("#sort_form ").find("input[name=ev] ").val();
+                    $(".filter-confirm-2 ").find("a ").attr("href ", arr + "&stime=" + id + " &ev=" + ev + " #x_crumbs ");
+                    $(".confirm ").find("a ").attr("data-href ", arr + "&stime=" + id + " #x_crumbs ");
+                }
+                $("#J-course-navbar-filter-wrap-loader ").addClass("g-hidden ");
+            });
+
+        })
+        $(function() {
+            $(".congzhi_xly ").click(function() {
+                scrollSwiper01.slideTo(0, 500, false);
+            });
+        });
+
+        // $(function() {
+        //     $("#xcx_ann ").xcx_ann();
+        // })
+    </script>
+    <script>
+        function getProList(key) {
+            var url = "";
+
+            if (key) {
+                url = urlString + "g=Api&m=CommonApi&a=getProList&title=" + key;
+            } else {
+                url = urlString + "g=Api&m=CommonApi&a=getProList";
+            }
+
+            console.log(url);
+
+            $.getJSON(url,
+                function(data) {
+                    var newData = data.sort(function(a, b) {
+                        var aDays = 0,
+                            bDays = 0;
+                        aDays = parseInt(a.sort);
+                        bDays = parseInt(b.sort);
+                        // console.log(aDays + "---" + bDays);
+                        return aDays - bDays;
+                    });
+
+                    console.log(newData);
+
+                    var html = "";
+                    newData.reduce(function(pre, item) {
+                        html += " <li><a href='detail.html?id=" + item.id + "'><h3>" +
+                            item.title + "</h3><div class='xly-ssc-img'><img src=' " +
+                            imgHead + item.img + " ' alt=' " +
+                            item.title + "'></div><div class='xly-ssc-r'><p>" + item.brief +
+                            "<strong>￥" + item.price + "<s>/" + item.trip_days + "</s></strong></p><div class='ssc_san'><span>适合对象：" +
+                            item.target + "</span> </div><div class='ssc_biaoq'>";
+
+                        if (item.type_list) {
+                            var typeList = item.type_list.split(",");
+                            typeList.reduce(function(pre, current) {
+                                html += " <span>" + current + "</span> ";
+                                return current;
+                            }, 0)
+                        }
+                        html += "<div class='clear'></div></div></div></a></li> ";
+
+
+                    }, 0);
+                    // html += '</ul>'
+                    //console.log(html);
+                    $('.xly-ss-c-ulss').empty();
+                    $('.xly-ss-c-ulss').append(html);
+
+                });
+        }
+
+        function search() {
+            var key = $("#keyword").val();
+            console.log(key);
+            getProList(key);
+        }
+
+        (function() {
+            var keyword = GetQueryString("name");
+            $("#keyword").val(keyword);
+
+            getProList(keyword);
+
+        })();
+    </script>
+
+</body>
+
+</html>

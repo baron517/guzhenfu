@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>订单详情 - 夏令营</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection" />
+    <link rel="dns-prefetch" href="https://api.mch.weixin.qq.com" />
+    <link href="css/sj_xly.main.css" rel="stylesheet" type="text/css" />
+    <!--[if lt IE 9]><script type="text/javascript" src="//img1.xhdxly.com/2016/mobile/html5shiv.js"></script><![endif]-->
+    <style>
+        .youhui_alert {
+            font-family: "微软雅黑";
+            font-size: 14px;
+            color: #ff0000
+        }
+    </style>
+</head>
+
+<body>
+    <script type="text/javascript">
+        // 防止该页面被其他页面iframe住
+        if (window != window.parent) {
+            window.parent.location = '/';
+        }
+    </script>
+    <div class="sjx_head" id="sjx_head">
+        <div class="sjx_hleft" id="mobilegoback"><i class="iconfont"></i></div>
+        <div class="h_img"><img src="img/sj_xlogo2.png"></div>
+        <div class="s-title">订单详情</div>
+    </div>
+    <div class="auto">
+        <div class="sjq_con">
+            <div class="sjq_cle">
+                <span class="sjq_b">订单提交成功！请尽快付款。</span>
+                <span class="sjq_x"> 应付金额：<b class="price_content"></b>元</span>
+            </div>
+            <!-- <div class="sjq_img"><i class="icon iconfont">&#xe639;</i></div> -->
+        </div>
+    </div>
+
+
+
+
+
+    <div class="auto mem_app3_m2">
+        <div class="sjq_tah mem_app3_m2_t on">
+            <a href="javascript:void(0)">
+                <span class="img"></span>我的支付清单</a>
+        </div>
+        <div class="mem_app3_m2_b">
+            <ul class="sjq_tul">
+                <li>
+
+                    <div class="sjq_tac active" id="order_content">
+                        <!-- <span>课程名称：</span>
+                 <span>时间：2018-07-03--2018-07-09</span>
+                 <span>单价：￥3900.00</span> -->
+                        <!-- <span>人数：1人</span> -->
+                    </div>
+                </li>
+
+            </ul>
+            <!-- <div class="sjq_hj">
+        <span>优惠：&nbsp;  80.00元</span>
+        <span>合计：<b>￥<span>3900.00</span></b></span>
+    </div> -->
+        </div>
+    </div>
+    <div class="h50"></div>
+    <div class="auto" style="display: none;">
+        <div class="sjq_zf">
+
+            <!-- <a href="javascript:void(0)" class="anniu pay_click" id="2" money="500">支付预定金</a> -->
+
+            <a href="javascript:void(0)" class="anniu pay_click" id="1" money="3,900.00">支付订单</a>
+            <div class="sjq_left"><a>实付款：￥<b class="price_content"></b></a></div>
+        </div>
+    </div>
+    <div class="auto sjd_tc_page">
+        <div class="sjd_tc">
+            <div class="sjs_fsh">
+                <a href="javascript:void(0)" target="_blank" title=""> <i class="iconfont"></i></a>
+                <p>付款方式</p>
+                <a href="javascript:void(0)" title="" target="_blank"> <i class="iconfont fse">&#xe60b;</i></a>
+            </div>
+            <div class="sjq_tab">
+                <form action="//pay.xialingying.cc/cashier/pay/" method="get" id="mobilepayment">
+                    <input type="hidden" name="order_mark_id" value="10332">
+                    <input type="hidden" name="cashier_id" value="12764">
+                    <input type="hidden" name="pay_money" value="390000">
+                    <input type="hidden" name="pay_money_reserve" value="50000">
+                    <input type="hidden" name="payment_type_id" value="1">
+                    <input type="hidden" name="passkey" value="39596acf193e8b4805bf48cc50cc5fde">
+                    <input type="hidden" name="pay_type" value="1">
+                    <input type="hidden" name="pay_mode" value="">
+                    <ul class="jsq_ful jsq_fuls" id="pay">
+                        <li>
+                            <span>订单金额</span><span><b id="money"></b>元</span>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" id="4">
+                                <div class="li_left">
+                                    <i class="iconfont ico_wx ico_wxs">&#xe67e;</i>
+                                    <div class="liz_wz">
+                                        <p>支付宝支付</p>
+                                        <p>支付宝安全支付</p>
+                                    </div>
+                                </div><i class="iconfont ico_jt">&#xe60b;</i>
+                                <div class="clear"></div>
+                            </a>
+                        </li>
+
+                    </ul>
+                </form>
+            </div>
+
+        </div>
+        <div class="por"></div>
+    </div>
+
+
+    <!-- <div class="mobile-yk-tck-bj" id="yk-tck-bj" >   
+<div class="mem_app3_box">
+<div class="mem_app3_box_t">
+<div class="mem_app3_box_t1">提示</div>
+<div class="mem_app3_box_close"><i class="iconfont">&#xe63d;</i></div>
+</div>
+<div class="mem_app3_box_b">
+<div class="mem_app3_box_b1">
+<p style=" margin-bottom: 15px;"><span>请在新打开的支付页面中完成付款！</span> </p>
+<p>付款成功后，我们的老师将与您电话联系；如有疑问，可致电：400-688-0688咨询。</p>
+</div>
+<div class="mem_app3_box_b2"> <span class="green">已付款成功：</span><a href="javascript:void(0);" class="payment_ok">查看订单详情>></a><br><br><span class="red">付款失败：</span><A href="javascript:void(0);" class="payment_err">立即重新付款>></A> </div>
+</div>
+</div>  
+
+<div class="mobile-yk-tck-mask" id="yk-tck-mask"></div>    
+</div>  -->
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/xin_xly_sj.js"></script>
+
+    <script>
+        (function() {
+            // var u_phone = localStorage.getItem("u_phone");
+            // $.getJSON(urlString + "g=Api&m=CommonApi&a=getOrderList&phone="+u_phone,
+            //     function(data) {
+            //         console.log(data);
+            //         $('#content').append(data.detail);
+            //     }
+            // );
+
+            var date = GetQueryString("date");
+            var title = GetQueryString("title");
+            var price = GetQueryString("price");
+
+            var html = " <span>课程名称：" + title + "</span><span>时间：" + date +
+                "</span><span>单价：￥" + price + "</span> "
+            $("#order_content").append(html);
+            $(".price_content").text(price);
+
+        })();
+    </script>
+
+    <script>
+        (function($) {
+            $.extend({
+                mobileapi: {
+                    page: function() {
+                        function tanchukuang() {
+                            var tck = $("#tanchukuang"),
+                                page = $("#yk-tck");
+                            if (tck.length > 0 && page.length > 0) {
+                                tck.unbind("click").bind("click", function() {
+                                    if (!$(this).hasClass("active")) {
+                                        page.css({
+                                            "display": "block"
+                                        }), $(this).addClass("active");
+                                    } else {
+                                        page.css({
+                                            "display": "none"
+                                        }), $(this).removeClass("active");
+                                    }
+                                })
+                            }
+                        }
+
+                        function tanchukuanghide() {
+                            $("#yk-tck-mask").on("click", function() {
+                                var tck = $("#tanchukuang"),
+                                    page = $("#yk-tck");
+                                $("#yk-tck").css({
+                                    'display': 'none'
+                                });
+                                page.css({
+                                    "display": "none"
+                                }), tck.removeClass("active");
+                            })
+                        }
+                        tanchukuang();
+                        tanchukuanghide();
+                    },
+                    daohang: function() {
+                        $(".sjx_hright").click(function() {
+                            $(".dj_sj_w").toggleClass("active");
+                        });
+                    }
+                }
+            })
+        })(jQuery);
+
+        $(function() {
+
+            $.mobileapi.page();
+            $.mobileapi.daohang();
+
+
+        });
+    </script>
+    <script>
+        $(function() {
+            $.extend({
+                payment: {
+                    payinfo: function() {
+                        var page = $('.mem_app3_m2');
+                        page.find('.mem_app3_m2_t').on('click', function() {
+                            if ($(this).hasClass('on')) {
+                                page.find('.mem_app3_m2_b').css({
+                                    'display': 'none'
+                                });
+                                $(this).removeClass('on');
+                            } else {
+                                page.find('.mem_app3_m2_b').css({
+                                    'display': 'block'
+                                });
+                                $(this).addClass('on');
+                            }
+                        })
+                    },
+                    payMode: function() {
+                        var page = $('#mem_app3_m1_b'),
+                            button = page.find('.payment_button');
+                        button.unbind('click').bind('click', function() {
+                            var me = $(this);
+                            button.removeClass('current');
+                            button.find('input').prop('checked', false);
+                            me.addClass('current');
+                            me.find('input').prop('checked', true);
+                        });
+                    },
+                    clickPayment: function() {
+                        var page = $('#payment'),
+                            alert = $('#yk-tck-bj');
+
+                        $('.mem_app3_box_close').on("click", function() {
+                            alert.hide();
+                            location.reload();
+                        });
+                        $('.payment_err').on("click", function() {
+                            alert.hide();
+                            location.reload();
+                        });
+                        $('.payment_ok').on('click', function() {
+                            location.href = "login.html";
+                        });
+
+                    }
+                }
+            });
+            $.payment.payinfo();
+            //$.payment.payMode();
+            $.payment.clickPayment();
+        })
+    </script>
+    <script>
+        $(function() {
+            var form = $('#mobilepayment');
+            $.extend({
+                mobilepayment: {
+                    pay_click: function() {
+                        var page = $('.pay_click');
+
+                        page.on('click', function() {
+                            var id = this.id,
+                                money = $(this).attr('money');
+                            form.find('input[name=pay_type]').val(id);
+                            $('#money').html(money);
+                            $('.sjd_tc_page').css('display', 'block');
+                            $('.sjd_tc').animate({
+                                left: "0",
+                                bottom: "0"
+                            }, 800);
+                        });
+                        $('.fse').click(function() {
+                            $('.sjd_tc_page').css('display', 'none');
+                            $('.sjd_tc').animate({
+                                left: "0",
+                                bottom: "-310"
+                            }, 800);
+                        });
+
+                    },
+                    pay: function() {
+                        var pay = $('#pay');
+                        pay.find('li > a').on('click', function() {
+                            var id = parseInt($(this).attr('id'));
+                            form.find('input[name=pay_mode]').val(id);
+                            form.submit();
+                            $('#yk-tck-bj').show();
+                        });
+                    }
+                }
+            });
+            $.mobilepayment.pay_click();
+            $.mobilepayment.pay();
+        })
+    </script>
+    <!-- <script>
+      $(function(){
+          if($('#youhuipage').length){
+              $('#youhuipage').html('<h6 class="youhui_alert">恭喜您！尊享最大优惠80.00元，请及时付款哟，优惠即将取消！</h6>');
+          }
+      });
+    </script>
+          <script>
+      $(function(){
+          if($('#youhuipage').length){
+              $('#youhuipage').show();
+          }
+      })
+    </script> -->
+</body>
+
+</html>
