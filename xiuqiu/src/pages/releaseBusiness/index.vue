@@ -116,27 +116,35 @@ export default {
                 this.cursorY += windowWidth+20;     
             }
 
-            canvasContext.draw(false, wx.canvasToTempFilePath({
-                    canvasId: 'mycanvas',
+
+            canvasContext.draw(false, function (e) {
+                wx.canvasToTempFilePath({
+                    canvasId: 'myCanvas',
                     success: function (res) {
+                        console.log("开始1");
                         console.log(res);
                     },
                     fail: function (e) {
+                        console.log("结束1");
                         console.log(e);
                     }
-                }));
+                })
+            }
+            );
 
-            // setTimeout(() => {
-            //     wx.canvasToTempFilePath({
-            //         canvasId: 'mycanvas',
-            //         success: function (res) {
-            //             console.log(res);
-            //         },
-            //         fail: function (e) {
-            //             console.log(e);
-            //         }
-            //     })
-            // }, 2000);
+            /* setTimeout(function() {
+                 wx.canvasToTempFilePath({
+                     canvasId: 'myCanvas',
+                     success: function (res) {
+                         console.log("开始1");
+                         console.log(res);
+                     },
+                     fail: function (e) {
+                         console.log("结束1");
+                         console.log(e);
+                     }
+                 })
+             }, 2000);*/
       },
 
         drawTextView: function(context){
